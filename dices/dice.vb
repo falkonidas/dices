@@ -3,19 +3,27 @@
     Private Shared rnd As New Random
     Private rolledDots As Integer
     Private viewImage As Image
-    Sub New()
+    Public Event diceStateChanged()
+    Public enabled As Boolean = True
 
-    End Sub
     Public Sub roll()
         If Me.isHold = False Then
             Me.rolledDots = rnd.Next(1, 7)
             setImage(Me.rolledDots)
+            RaiseEvent diceStateChanged()
         End If
     End Sub
 
-    Public Sub setHold(ByVal sender As Object)
-        isHold = If(CBool(isHold), False, True)
-        diceUpdateView(sender)
+    Public Sub setHold()
+        If enabled = True Then
+            isHold = If(CBool(isHold), False, True)
+            RaiseEvent diceStateChanged()
+        End If
+    End Sub
+
+    Public Sub unhold()
+        Me.isHold = False
+        RaiseEvent diceStateChanged()
     End Sub
 
     Public Function getHold()
@@ -26,8 +34,13 @@
         Return viewImage
     End Function
 
-    Public Function getdots()
-        Return rolledDots
+    Public Sub clearDots()
+        Me.rolledDots = 0
+        RaiseEvent diceStateChanged()
+    End Sub
+
+    Public Function getDots()
+        Return Me.rolledDots
     End Function
 
     Private Sub setImage(ByVal rolledDots)
@@ -45,8 +58,5 @@
             Case 6
                 viewImage = My.Resources.Resource1.dot6
         End Select
-    End Sub
-    Private Sub diceUpdateView(ByVal sender As Object)
-        sender.BorderStyle = If(Me.isHold, BorderStyle.Fixed3D, BorderStyle.None)
     End Sub
 End Class
