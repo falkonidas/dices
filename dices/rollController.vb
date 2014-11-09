@@ -1,5 +1,5 @@
 ﻿Public Class rollController
-    Public dices As New List(Of dice)
+    Inherits controller
     Public rollCounter As New Integer
     Public Event dicesRolled()
 
@@ -16,10 +16,6 @@
 
     Public Sub disableRolling()
         Form1.Button1.Enabled = False
-    End Sub
-
-    Public Sub getDices(ByVal dices As List(Of dice))
-        Me.dices = dices
     End Sub
 
     Public Sub enableHoldingDices()
@@ -43,7 +39,7 @@
             If dice.getHold = True Then counter += 1
         Next
 
-        If game.preGameOrPrescore = False Then
+        If game.preGameOrPreScore = False Then
             If counter = 5 Then
                 disableRolling()
             Else
@@ -56,7 +52,7 @@
     Private Sub incrementRollCounter() Handles Me.dicesRolled
         Me.rollCounter += 1
         If rollCounter = 3 Then
-            game.preGameOrPrescore = True
+            game.preGameOrPreScore = True
             disableRolling()
             unholdDices()
             disableHoldingDices()

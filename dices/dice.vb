@@ -59,4 +59,9 @@
                 viewImage = My.Resources.Resource1.dot6
         End Select
     End Sub
+
+    Public Sub setRolledDots(ByVal dots As Integer)
+        Me.rolledDots = dots
+        setImage(Me.rolledDots)
+    End Sub
 End Class

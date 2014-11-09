@@ -22,8 +22,8 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
@@ -31,10 +31,11 @@ Partial Class Form1
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.PictureBox5 = New System.Windows.Forms.PictureBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
         Me.labels = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.scores1Player = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -110,6 +111,33 @@ Partial Class Form1
         Me.DataGridView1.Size = New System.Drawing.Size(264, 413)
         Me.DataGridView1.TabIndex = 11
         '
+        'labels
+        '
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black
+        Me.labels.DefaultCellStyle = DataGridViewCellStyle5
+        Me.labels.HeaderText = ""
+        Me.labels.Name = "labels"
+        Me.labels.ReadOnly = True
+        Me.labels.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.labels.Width = 230
+        '
+        'scores1Player
+        '
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black
+        Me.scores1Player.DefaultCellStyle = DataGridViewCellStyle6
+        Me.scores1Player.HeaderText = "#1"
+        Me.scores1Player.Name = "scores1Player"
+        Me.scores1Player.ReadOnly = True
+        Me.scores1Player.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.scores1Player.Width = 30
+        '
         'Button4
         '
         Me.Button4.Location = New System.Drawing.Point(174, 485)
@@ -128,38 +156,21 @@ Partial Class Form1
         Me.Button5.Text = "Start Game"
         Me.Button5.UseVisualStyleBackColor = True
         '
-        'labels
+        'Button2
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black
-        Me.labels.DefaultCellStyle = DataGridViewCellStyle1
-        Me.labels.HeaderText = ""
-        Me.labels.Name = "labels"
-        Me.labels.ReadOnly = True
-        Me.labels.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.labels.Width = 230
-        '
-        'scores1Player
-        '
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(238, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black
-        Me.scores1Player.DefaultCellStyle = DataGridViewCellStyle2
-        Me.scores1Player.HeaderText = "#1"
-        Me.scores1Player.Name = "scores1Player"
-        Me.scores1Player.ReadOnly = True
-        Me.scores1Player.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.scores1Player.Width = 30
+        Me.Button2.Location = New System.Drawing.Point(174, 381)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.TabIndex = 21
+        Me.Button2.Text = "test"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(281, 513)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.DataGridView1)
@@ -191,5 +202,6 @@ Partial Class Form1
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents labels As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents scores1Player As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Button2 As System.Windows.Forms.Button
 
 End Class

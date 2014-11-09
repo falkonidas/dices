@@ -10,42 +10,22 @@
     Public dices As List(Of dice) = New List(Of dice) From {dice1, dice2, dice3, dice4, dice5}
 
     Public rollController As rollController = New rollController
+    Public scoreController As scoreController = New scoreController
 
     Public Sub rollDices()
         rollController.getDices(dices)
         rollController.rollDices()
 
-        getUpperScore(1)
-        getUpperScore(2)
-        getUpperScore(3)
-        getUpperScore(4)
-        getUpperScore(5)
-        getUpperScore(6)
-        getChanceScore()
-
+        scoreController.getDices(dices)
+        scoreController.getScores()
     End Sub
 
-    Public Sub getUpperScore(ByVal dots As Integer)
-        Dim score As Integer
-        For Each dice In Me.dices
-            If dice.getDots = dots Then
-                score += dots
-            End If
-        Next
-        Form1.DataGridView1.Rows(dots - 1).Cells(1).Value = score
-    End Sub
-
-    Public Sub getChanceScore()
-        Dim score = dice1.getDots + dice2.getDots + dice3.getDots + dice4.getDots + dice5.getDots
-        Form1.DataGridView1.Rows(15).Cells(1).Value = score
-    End Sub
-
-
-    Public Sub updateView() Handles dice1.diceStateChanged, dice2.diceStateChanged, dice3.diceStateChanged, dice4.diceStateChanged, dice5.diceStateChanged
-
+    Public Sub updateRollButton() Handles dice1.diceStateChanged, dice2.diceStateChanged, dice3.diceStateChanged, dice4.diceStateChanged, dice5.diceStateChanged
         game.rollController.getDices(game.dices)
         game.rollController.checkDicesHold()
+    End Sub
 
+    Public Sub updateDicesView() Handles dice1.diceStateChanged, dice2.diceStateChanged, dice3.diceStateChanged, dice4.diceStateChanged, dice5.diceStateChanged
         Form1.PictureBox1.Image = dice1.getImage
         Form1.PictureBox2.Image = dice2.getImage
         Form1.PictureBox3.Image = dice3.getImage
@@ -57,7 +37,5 @@
         Form1.PictureBox3.BorderStyle = If(dice3.getHold, BorderStyle.Fixed3D, BorderStyle.None)
         Form1.PictureBox4.BorderStyle = If(dice4.getHold, BorderStyle.Fixed3D, BorderStyle.None)
         Form1.PictureBox5.BorderStyle = If(dice5.getHold, BorderStyle.Fixed3D, BorderStyle.None)
-
     End Sub
-
 End Class

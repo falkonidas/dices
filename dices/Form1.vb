@@ -1,4 +1,5 @@
 ﻿Public Class Form1
+    'Dim game = New gameClass
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         DataGridView1.Rows.Add(New String() {"Aces", ""})
@@ -66,5 +67,17 @@
         game.rollController.enableRolling()
         game.rollDices()
         Button5.Enabled = False
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        game.dices(0).setRolledDots(1)
+        game.dices(1).setRolledDots(1)
+        game.dices(2).setRolledDots(1)
+        game.dices(3).setRolledDots(1)
+        game.dices(4).setRolledDots(1)
+        game.updateDicesview()
+        game.updateRollButton()
+        game.scoreController.getDices(game.dices)
+        game.scoreController.getScores()
     End Sub
 End Class
