@@ -77,18 +77,6 @@
         Button5.Enabled = False
     End Sub
 
-    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
-        'test
-        game.dices(0).setRolledDots(6)
-        game.dices(1).setRolledDots(6)
-        game.dices(2).setRolledDots(6)
-        game.dices(3).setRolledDots(6)
-        game.dices(4).setRolledDots(6)
-        game.updateDicesview()
-        game.updateRollButton()
-        game.scoreController.getDices(game.dices)
-    End Sub
-
     Private Sub DataGridView1_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellClick
         If e.ColumnIndex = 1 AndAlso {0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14}.Contains(e.RowIndex) Then
 
@@ -130,14 +118,4 @@
         End If
     End Sub
 
-    Private Sub Button3_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        game.dices(0).setRolledDots(5)
-        game.dices(1).setRolledDots(5)
-        game.dices(2).setRolledDots(5)
-        game.dices(3).setRolledDots(5)
-        game.dices(4).setRolledDots(5)
-        game.updateDicesView()
-        game.updateRollButton()
-        game.scoreController.getDices(game.dices)
-    End Sub
 End Class
