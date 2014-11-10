@@ -34,11 +34,12 @@
     End Sub
 
     Public Sub checkDicesHold()
+
         Dim counter As Integer
+
         For Each dice In dices
             If dice.getHold = True Then counter += 1
         Next
-
         If game.preGameOrPreScore = False Then
             If counter = 5 Then
                 disableRolling()

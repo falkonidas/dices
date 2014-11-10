@@ -1,31 +1,18 @@
 ﻿Public Class scoreController
     Inherits controller
-    Public Sub getScores()
-        getUpperScore(1)
-        getUpperScore(2)
-        getUpperScore(3)
-        getUpperScore(4)
-        getUpperScore(5)
-        getUpperScore(6)
-        get3ofKindScore()
-        get4ofKindScore()
-        getSmallStraight()
-        getLargeStraight()
-        getYahtzee()
-        getChanceScore()
-    End Sub
+    Public scoreTable As New scoreTable
 
-    Public Sub getUpperScore(ByVal dots As Integer)
+    Public Function getUpperScore(ByVal dots As Integer)
         Dim score As Integer
         For Each dice In Me.dices
             If dice.getDots = dots Then
                 score += dots
             End If
         Next
-        Form1.DataGridView1.Rows(dots - 1).Cells(1).Value = score
-    End Sub
+        Return score
+    End Function
 
-    Public Sub get3ofKindScore()
+    Public Function get3ofKindScore()
         Dim score As Integer
         Dim dotsString = dicesDotsToString()
 
@@ -34,11 +21,11 @@
 
             score = dices(0).getDots + dices(1).getDots + dices(2).getDots + dices(3).getDots + dices(4).getDots
         End If
+        Return score
 
-        Form1.DataGridView1.Rows(8).Cells(1).Value = score
-    End Sub
+    End Function
 
-    Public Sub get4ofKindScore()
+    Public Function get4ofKindScore()
         Dim score As Integer
         Dim dotsString = dicesDotsToString()
 
@@ -47,12 +34,25 @@
 
             score = dices(0).getDots + dices(1).getDots + dices(2).getDots + dices(3).getDots + dices(4).getDots
         End If
+        Return score
+    End Function
 
-        Form1.DataGridView1.Rows(9).Cells(1).Value = score
-    End Sub
+    Public Function getFullHouse()
 
+        Dim score As Integer
+        Dim countlist As New List(Of Integer) From {0, 0, 0, 0, 0, 0}
 
-    Public Sub getSmallStraight()
+        For Each dice In Me.dices
+            countlist(dice.getDots - 1) += 1
+        Next
+
+        If countlist.Contains(3) AndAlso countlist.Contains(2) Then
+            score = 25
+        End If
+        Return score
+    End Function
+
+    Public Function getSmallStraight()
         Dim score As Integer
 
         Dim straight1 = New HashSet(Of Integer) From {1, 2, 3, 4}
@@ -68,12 +68,10 @@
         If straight1.IsSubsetOf(dotsSet) OrElse straight2.IsSubsetOf(dotsSet) OrElse straight3.IsSubsetOf(dotsSet) Then
             score = 30
         End If
+        Return score
+    End Function
 
-        Form1.DataGridView1.Rows(12).Cells(1).Value = score
-
-    End Sub
-
-    Public Sub getLargeStraight()
+    Public Function getLargeStraight()
         Dim score As Integer
         Dim straight1 = New HashSet(Of Integer) From {1, 2, 3, 4, 5}
         Dim straight2 = New HashSet(Of Integer) From {2, 3, 4, 5, 6}
@@ -86,11 +84,11 @@
         If straight1.SetEquals(dotsSet) OrElse straight2.SetEquals(dotsSet) Then
             score = 40
         End If
+        Return score
 
-        Form1.DataGridView1.Rows(13).Cells(1).Value = score
-    End Sub
+    End Function
 
-    Public Sub getYahtzee()
+    Public Function getYahtzee()
         Dim score As Integer
 
         Dim dotsString = dicesDotsToString()
@@ -99,12 +97,20 @@
             OrElse dotsString.Contains("44444") OrElse dotsString.Contains("55555") OrElse dotsString.Contains("66666") Then
             score = 50
         End If
-
-        Form1.DataGridView1.Rows(14).Cells(1).Value = score
-    End Sub
-    Public Sub getChanceScore()
+        Return score
+    End Function
+    Public Function getChanceScore()
         Dim score = dices(0).getDots + dices(1).getDots + dices(2).getDots + dices(3).getDots + dices(4).getDots
-        Form1.DataGridView1.Rows(15).Cells(1).Value = score
+        Return score
+    End Function
+
+    Public Sub updateUpperScoreTotal()
+        Dim score As Integer
+        For i = 0 To 5
+            score += Form1.DataGridView1.Rows(i).Cells(1).Value
+        Next
+
+        Form1.DataGridView1.Rows(7).Cells(1).Value = score
     End Sub
 
     Private Function dicesDotsToString()
@@ -114,7 +120,6 @@
         Next
         dicesScores.Sort()
         Dim dotsString As String = String.Join("", dicesScores)
-
         Return dotsString
     End Function
 End Class

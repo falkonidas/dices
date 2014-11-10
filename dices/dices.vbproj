@@ -105,6 +105,8 @@
     </Compile>
     <Compile Include="rollController.vb" />
     <Compile Include="scoreController.vb" />
+    <Compile Include="scoreTable.vb" />
+    <Compile Include="scoreTableCell.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">

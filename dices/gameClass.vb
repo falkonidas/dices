@@ -9,15 +9,37 @@
     Public WithEvents dice5 As dice = New dice
     Public dices As List(Of dice) = New List(Of dice) From {dice1, dice2, dice3, dice4, dice5}
 
-    Public rollController As rollController = New rollController
+    Public WithEvents rollController As rollController = New rollController
     Public scoreController As scoreController = New scoreController
 
+    Public Event roll()
+
     Public Sub rollDices()
+        RaiseEvent roll()
+
         rollController.getDices(dices)
         rollController.rollDices()
 
         scoreController.getDices(dices)
-        scoreController.getScores()
+
+        scoreController.scoreTable.updateScoreTableView()
+        searchForGameOver()
+    End Sub
+
+    Public Sub searchForGameOver()
+        Dim counter = 0
+        For Each cell In game.scoreController.scoreTable.scoreTableCells
+            If cell.empty = True Then
+                counter += 1
+            End If
+        Next
+        If counter = 0 Then
+            game.rollController.disableHoldingDices()
+            game.rollController.disableRolling()
+            Form1.Button5.Enabled = True
+            MessageBox.Show("Game over, your score = " & game.scoreController.scoreTable.scoreTableCells(16).writtenScore)
+        End If
+
     End Sub
 
     Public Sub updateRollButton() Handles dice1.diceStateChanged, dice2.diceStateChanged, dice3.diceStateChanged, dice4.diceStateChanged, dice5.diceStateChanged
