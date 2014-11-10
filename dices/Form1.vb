@@ -24,6 +24,8 @@
 
         game.rollController.disableHoldingDices()
         game.rollController.disableRolling()
+
+        DataGridView1.Enabled = False
     End Sub
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
@@ -53,7 +55,7 @@
 
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
         'startgame
-
+        DataGridView1.Enabled = True
         For Each cell In game.scoreController.scoreTable.scoreTableCells
             cell.writtenScore = Nothing
             cell.empty = True

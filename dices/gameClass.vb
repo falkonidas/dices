@@ -37,6 +37,7 @@
             game.rollController.disableHoldingDices()
             game.rollController.disableRolling()
             Form1.Button5.Enabled = True
+            Form1.DataGridView1.Enabled = False
             MessageBox.Show("Game over, your score = " & game.scoreController.scoreTable.scoreTableCells(16).writtenScore)
         End If
 
