@@ -1,7 +1,5 @@
 ﻿Public Class gameClass
 
-    Public preGameOrPreScore As Boolean = True
-
     Public WithEvents dice1 As dice = New dice
     Public WithEvents dice2 As dice = New dice
     Public WithEvents dice3 As dice = New dice
@@ -10,42 +8,42 @@
     Public dices As List(Of dice) = New List(Of dice) From {dice1, dice2, dice3, dice4, dice5}
 
     Public WithEvents rollController As rollController = New rollController
-    Public scoreController As scoreController = New scoreController
 
-    Public Event roll()
+
+    Public scoreTable As New scoreTable
 
     Public Sub rollDices()
-        RaiseEvent roll()
 
         rollController.getDices(dices)
         rollController.rollDices()
 
-        scoreController.getDices(dices)
+        scoreTable.scoreController.getDices(dices)
 
-        scoreController.scoreTable.updateScoreTableView()
+        scoreTable.updateScoreTableView()
+
         searchForGameOver()
     End Sub
 
     Public Sub searchForGameOver()
         Dim counter = 0
-        For Each cell In game.scoreController.scoreTable.scoreTableCells
+        For Each cell In scoreTable.scoreTableCells
             If cell.empty = True Then
                 counter += 1
             End If
         Next
         If counter = 0 Then
-            game.rollController.disableHoldingDices()
-            game.rollController.disableRolling()
+            rollController.disableHoldingDices()
+            rollController.disableRolling()
             Form1.Button5.Enabled = True
             Form1.DataGridView1.Enabled = False
-            MessageBox.Show("Game over, your score = " & game.scoreController.scoreTable.scoreTableCells(16).writtenScore)
+            MessageBox.Show("Game over, your score = " & scoreTable.scoreTableCells(16).getScore)
         End If
 
     End Sub
 
     Public Sub updateRollButton() Handles dice1.diceStateChanged, dice2.diceStateChanged, dice3.diceStateChanged, dice4.diceStateChanged, dice5.diceStateChanged
-        game.rollController.getDices(game.dices)
-        game.rollController.checkDicesHold()
+        rollController.getDices(dices)
+        rollController.checkDicesHold()
     End Sub
 
     Public Sub updateDicesView() Handles dice1.diceStateChanged, dice2.diceStateChanged, dice3.diceStateChanged, dice4.diceStateChanged, dice5.diceStateChanged

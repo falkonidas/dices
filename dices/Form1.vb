@@ -1,6 +1,7 @@
 ﻿Public Class Form1
-    'Dim game = New gameClass
+    Dim game = New gameClass
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        'prepare datagrid
         DataGridView1.Rows.Add(New String() {"Aces", ""})
         DataGridView1.Rows.Add(New String() {"Twos", ""})
         DataGridView1.Rows.Add(New String() {"Threes", ""})
@@ -34,58 +35,53 @@
     End Sub
 
     Private Sub PictureBox1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles PictureBox1.Click
+        'hold dice1
         game.dice1.setHold()
     End Sub
 
     Private Sub PictureBox2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles PictureBox2.Click
+        'hold dice2
         game.dice2.setHold()
     End Sub
 
     Private Sub PictureBox3_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles PictureBox3.Click
+        'hold dice3
         game.dice3.setHold()
     End Sub
 
     Private Sub PictureBox4_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles PictureBox4.Click
+        'hold dice4
         game.dice4.setHold()
     End Sub
 
     Private Sub PictureBox5_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles PictureBox5.Click
+        'hold dice5
         game.dice5.setHold()
     End Sub
 
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
         'startgame
+
         DataGridView1.Enabled = True
-        For Each cell In game.scoreController.scoreTable.scoreTableCells
-            cell.writtenScore = Nothing
-            cell.empty = True
-            cell.writable = True
-        Next
-        game.scoreController.scoreTable.scoreTableCells(6).empty = False
-        game.scoreController.scoreTable.scoreTableCells(7).empty = False
-        game.scoreController.scoreTable.scoreTableCells(15).empty = False
-        game.scoreController.scoreTable.scoreTableCells(16).empty = False
-        game.scoreController.scoreTable.scoreTableCells(6).writable = False
-        game.scoreController.scoreTable.scoreTableCells(7).writable = False
-        game.scoreController.scoreTable.scoreTableCells(15).writable = False
-        game.scoreController.scoreTable.scoreTableCells(16).writable = False
 
+        game.scoreTable.setupTable()
 
-        game.preGameOrPreScore = False
+        game.rollController.preGameOrPreScore = False
         game.rollController.getDices(game.dices)
         game.rollController.enableHoldingDices()
         game.rollController.enableRolling()
         game.rollDices()
+
         Button5.Enabled = False
     End Sub
 
     Private Sub DataGridView1_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellClick
         If e.ColumnIndex = 1 AndAlso {0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14}.Contains(e.RowIndex) Then
 
-            If game.scoreController.scoreTable.scoreTableCells(e.RowIndex).empty = True Then
-                game.scoreController.scoreTable.writeScore(e.RowIndex)
+            If game.scoreTable.scoreTableCells(e.RowIndex).empty = True Then
+                game.scoreTable.writeScore(e.RowIndex)
 
-                game.preGameOrPreScore = False
+                game.rollcontroller.preGameOrPreScore = False
 
                 game.rollController.rollCounter = 0
                 game.rollController.enableRolling()
@@ -95,10 +91,6 @@
                 game.rollDices()
             End If
         End If
-
-    End Sub
-
-    Private Sub DataGridView1_CellMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellMouseEventArgs) Handles DataGridView1.CellMouseClick
 
     End Sub
 

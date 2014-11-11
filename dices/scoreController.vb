@@ -1,6 +1,5 @@
 ﻿Public Class scoreController
     Inherits controller
-    Public scoreTable As New scoreTable
 
     Public Function getUpperScore(ByVal dots As Integer)
         Dim score As Integer
