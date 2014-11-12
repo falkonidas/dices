@@ -4,7 +4,14 @@
     Private rolledDots As Integer
     Private viewImage As Image
     Public Event diceStateChanged()
-    Public enabled As Boolean = True
+    Private enabled As Boolean = False
+
+    Public Sub setEnabled(ByVal enabled)
+        Me.enabled = enabled
+    End Sub
+    'Public Function getEnabled()
+    '    Return enabled
+    'End Function
 
     Public Sub roll()
         If Me.isHold = False Then

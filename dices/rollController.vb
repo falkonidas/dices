@@ -13,23 +13,21 @@
 
     Public Sub enableRolling()
         Form1.Button1.Enabled = True
-
     End Sub
 
     Public Sub disableRolling()
         Form1.Button1.Enabled = False
-
     End Sub
 
     Public Sub enableHoldingDices()
         For Each dice In Me.dices
-            dice.enabled = True
+            dice.setEnabled(True)
         Next
     End Sub
 
     Public Sub disableHoldingDices()
         For Each dice In Me.dices
-            dice.enabled = False
+            dice.setEnabled(False)
         Next
     End Sub
 
@@ -47,7 +45,6 @@
                 enableRolling()
             End If
         End If
-
     End Sub
 
     Private Sub incrementRollCounter() Handles Me.dicesRolled

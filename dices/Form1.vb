@@ -23,8 +23,7 @@
         DataGridView1.Width = DataGridView1.Columns.GetColumnsWidth(0) + 1
         DataGridView1.Height = DataGridView1.Rows.GetRowsHeight(0) + 18
 
-        game.rollController.disableHoldingDices()
-        game.rollController.disableRolling()
+        game.disableRolling()
 
         DataGridView1.Enabled = False
     End Sub
@@ -36,59 +35,42 @@
 
     Private Sub PictureBox1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles PictureBox1.Click
         'hold dice1
-        game.dice1.setHold()
+        game.holdDice(0)
     End Sub
 
     Private Sub PictureBox2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles PictureBox2.Click
         'hold dice2
-        game.dice2.setHold()
+        game.holdDice(1)
     End Sub
 
     Private Sub PictureBox3_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles PictureBox3.Click
         'hold dice3
-        game.dice3.setHold()
+        game.holDdice(2)
     End Sub
 
     Private Sub PictureBox4_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles PictureBox4.Click
         'hold dice4
-        game.dice4.setHold()
+        game.holDdice(3)
     End Sub
 
     Private Sub PictureBox5_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles PictureBox5.Click
         'hold dice5
-        game.dice5.setHold()
+        game.holDdice(4)
     End Sub
 
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
         'startgame
-
         DataGridView1.Enabled = True
-
-        game.scoreTable.setupTable()
-
-        game.rollController.preGameOrPreScore = False
-        game.rollController.getDices(game.dices)
-        game.rollController.enableHoldingDices()
-        game.rollController.enableRolling()
-        game.rollDices()
-
+        game.startGame()
         Button5.Enabled = False
     End Sub
 
     Private Sub DataGridView1_CellClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridView1.CellClick
         If e.ColumnIndex = 1 AndAlso {0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14}.Contains(e.RowIndex) Then
 
-            If game.scoreTable.scoreTableCells(e.RowIndex).empty = True Then
-                game.scoreTable.writeScore(e.RowIndex)
-
-                game.rollcontroller.preGameOrPreScore = False
-
-                game.rollController.rollCounter = 0
-                game.rollController.enableRolling()
-                game.rollController.enableHoldingDices()
-                game.rollController.unholdDices()
-
-                game.rollDices()
+            If game.getTableCellEmpty(e.RowIndex) = True Then
+                game.writeScore(e.RowIndex)
+                game.continueGameAfterScoring()
             End If
         End If
 

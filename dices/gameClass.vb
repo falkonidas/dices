@@ -1,24 +1,56 @@
 ﻿Public Class gameClass
 
-    Public WithEvents dice1 As dice = New dice
-    Public WithEvents dice2 As dice = New dice
-    Public WithEvents dice3 As dice = New dice
-    Public WithEvents dice4 As dice = New dice
-    Public WithEvents dice5 As dice = New dice
-    Public dices As List(Of dice) = New List(Of dice) From {dice1, dice2, dice3, dice4, dice5}
+    Private WithEvents dice1 As dice = New dice
+    Private WithEvents dice2 As dice = New dice
+    Private WithEvents dice3 As dice = New dice
+    Private WithEvents dice4 As dice = New dice
+    Private WithEvents dice5 As dice = New dice
+    Private dices As List(Of dice) = New List(Of dice) From {dice1, dice2, dice3, dice4, dice5}
 
-    Public WithEvents rollController As rollController = New rollController
-
-
+    Public rollController As rollController = New rollController
     Public scoreTable As New scoreTable
 
-    Public Sub rollDices()
+    Public Sub holdDice(ByVal id)
+        Me.dices(id).setHold()
+    End Sub
 
+    Public Sub startGame()
+        scoreTable.setupTable()
+        rollController.getDices(dices)
+        rollController.preGameOrPreScore = False
+        rollController.enableHoldingDices()
+        rollController.enableRolling()
+        rollDices()
+    End Sub
+
+    Public Sub continueGameAfterScoring()
+        rollController.preGameOrPreScore = False
+        rollController.rollCounter = 0
+        rollController.enableRolling()
+        rollController.enableHoldingDices()
+        rollController.unholdDices()
+        rollDices()
+    End Sub
+
+    Public Sub writeScore(ByVal row)
+        scoreTable.writeScore(row)
+    End Sub
+
+    Public Sub disableRolling()
+        rollController.disableRolling()
+    End Sub
+    'Public Sub sendDicesToRollController()
+    '   rollController.getDices(Me.dices)
+    'End Sub
+
+    Public Function getTableCellEmpty(ByVal row)
+        Return scoreTable.scoreTableCells(row).empty
+    End Function
+    Public Sub rollDices()
         rollController.getDices(dices)
         rollController.rollDices()
 
         scoreTable.scoreController.getDices(dices)
-
         scoreTable.updateScoreTableView()
 
         searchForGameOver()
