@@ -9,9 +9,6 @@
     Public Sub setEnabled(ByVal enabled)
         Me.enabled = enabled
     End Sub
-    'Public Function getEnabled()
-    '    Return enabled
-    'End Function
 
     Public Sub roll()
         If Me.isHold = False Then

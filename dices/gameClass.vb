@@ -7,8 +7,8 @@
     Private WithEvents dice5 As dice = New dice
     Private dices As List(Of dice) = New List(Of dice) From {dice1, dice2, dice3, dice4, dice5}
 
-    Public rollController As rollController = New rollController
-    Public scoreTable As New scoreTable
+    Private rollDicesRules As rolldicesRules = New rolldicesRules
+    Private scoreTable As New scoreTable
 
     Public Sub holdDice(ByVal id)
         Me.dices(id).setHold()
@@ -16,19 +16,19 @@
 
     Public Sub startGame()
         scoreTable.setupTable()
-        rollController.getDices(dices)
-        rollController.preGameOrPreScore = False
-        rollController.enableHoldingDices()
-        rollController.enableRolling()
+        rollDicesRules.getDices(dices)
+        rollDicesRules.preGameOrPreScore = False
+        rollDicesRules.enableHoldingDices()
+        rollDicesRules.enableRolling()
         rollDices()
     End Sub
 
     Public Sub continueGameAfterScoring()
-        rollController.preGameOrPreScore = False
-        rollController.rollCounter = 0
-        rollController.enableRolling()
-        rollController.enableHoldingDices()
-        rollController.unholdDices()
+        rollDicesRules.preGameOrPreScore = False
+        rollDicesRules.rollCounter = 0
+        rollDicesRules.enableRolling()
+        rollDicesRules.enableHoldingDices()
+        rollDicesRules.unholdDices()
         rollDices()
     End Sub
 
@@ -37,20 +37,16 @@
     End Sub
 
     Public Sub disableRolling()
-        rollController.disableRolling()
+        rollDicesRules.disableRolling()
     End Sub
-    'Public Sub sendDicesToRollController()
-    '   rollController.getDices(Me.dices)
-    'End Sub
-
     Public Function getTableCellEmpty(ByVal row)
         Return scoreTable.scoreTableCells(row).empty
     End Function
     Public Sub rollDices()
-        rollController.getDices(dices)
-        rollController.rollDices()
+        rollDicesRules.getDices(dices)
+        rollDicesRules.rollDices()
 
-        scoreTable.scoreController.getDices(dices)
+        scoreTable.scoreRules.getDices(dices)
         scoreTable.updateScoreTableView()
 
         searchForGameOver()
@@ -64,8 +60,8 @@
             End If
         Next
         If counter = 0 Then
-            rollController.disableHoldingDices()
-            rollController.disableRolling()
+            rollDicesRules.disableHoldingDices()
+            rollDicesRules.disableRolling()
             Form1.Button5.Enabled = True
             Form1.DataGridView1.Enabled = False
             MessageBox.Show("Game over, your score = " & scoreTable.scoreTableCells(16).getScore)
@@ -73,11 +69,11 @@
 
     End Sub
 
-    Public Sub updateRollButton() Handles dice1.diceStateChanged, dice2.diceStateChanged, dice3.diceStateChanged, dice4.diceStateChanged, dice5.diceStateChanged
-        rollController.getDices(dices)
-        rollController.checkDicesHold()
-    End Sub
 
+    Public Sub updateRollButton() Handles dice1.diceStateChanged, dice2.diceStateChanged, dice3.diceStateChanged, dice4.diceStateChanged, dice5.diceStateChanged
+        rollDicesRules.getDices(dices)
+        rollDicesRules.checkDicesHold()
+    End Sub
     Public Sub updateDicesView() Handles dice1.diceStateChanged, dice2.diceStateChanged, dice3.diceStateChanged, dice4.diceStateChanged, dice5.diceStateChanged
         Form1.PictureBox1.Image = dice1.getImage
         Form1.PictureBox2.Image = dice2.getImage

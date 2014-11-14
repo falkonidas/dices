@@ -1,5 +1,5 @@
-﻿Public Class scoreController
-    Inherits controller
+﻿Public Class scoreRules
+    Inherits dicesRules
 
     Public Function getUpperScore(ByVal dots As Integer)
         Dim score As Integer

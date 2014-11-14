@@ -102,8 +102,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
-    <Compile Include="rollController.vb" />
-    <Compile Include="scoreController.vb" />
+    <Compile Include="rollDicesRules.vb" />
+    <Compile Include="scoreRules.vb" />
     <Compile Include="scoreTable.vb" />
     <Compile Include="scoreTableCell.vb" />
   </ItemGroup>

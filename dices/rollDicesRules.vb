@@ -1,5 +1,5 @@
-﻿Public Class rollController
-    Inherits controller
+﻿Public Class rollDicesRules
+    Inherits dicesRules
     Public preGameOrPreScore As Boolean = True
     Public rollCounter As New Integer
     Public Event dicesRolled()
@@ -62,4 +62,5 @@
             dice.unhold()
         Next
     End Sub
+
 End Class

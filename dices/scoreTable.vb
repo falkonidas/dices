@@ -1,46 +1,46 @@
 ﻿Public Class scoreTable
 
-    Public scoreController As scoreController = New scoreController
+    Public scoreRules As scoreRules = New scoreRules
 
-    Dim aces As New scoreTableCell(0) With {.empty = True, .writable = True}
-    Dim twos As New scoreTableCell(1) With {.empty = True, .writable = True}
-    Dim threes As New scoreTableCell(2) With {.empty = True, .writable = True}
-    Dim fours As New scoreTableCell(3) With {.empty = True, .writable = True}
-    Dim fives As New scoreTableCell(4) With {.empty = True, .writable = True}
-    Dim sixes As New scoreTableCell(5) With {.empty = True, .writable = True}
+    Private aces As New scoreTableCell(0) With {.empty = True, .writable = True}
+    Private twos As New scoreTableCell(1) With {.empty = True, .writable = True}
+    Private threes As New scoreTableCell(2) With {.empty = True, .writable = True}
+    Private fours As New scoreTableCell(3) With {.empty = True, .writable = True}
+    Private fives As New scoreTableCell(4) With {.empty = True, .writable = True}
+    Private sixes As New scoreTableCell(5) With {.empty = True, .writable = True}
 
-    Dim prem As New scoreTableCell(6) With {.empty = False, .writable = False}
-    Dim upperTotal As New scoreTableCell(7) With {.empty = False, .writable = False}
+    Private prem As New scoreTableCell(6) With {.empty = False, .writable = False}
+    Private upperTotal As New scoreTableCell(7) With {.empty = False, .writable = False}
 
-    Dim threeOfKind As New scoreTableCell(8) With {.empty = True, .writable = True}
-    Dim fourOfKind As New scoreTableCell(9) With {.empty = True, .writable = True}
-    Dim fullHouse As New scoreTableCell(10) With {.empty = True, .writable = True}
-    Dim smallStraight As New scoreTableCell(11) With {.empty = True, .writable = True}
-    Dim largeStraight As New scoreTableCell(12) With {.empty = True, .writable = True}
-    Dim yahtzee As New scoreTableCell(13) With {.empty = True, .writable = True}
-    Dim chance As New scoreTableCell(14) With {.empty = True, .writable = True}
+    Private threeOfKind As New scoreTableCell(8) With {.empty = True, .writable = True}
+    Private fourOfKind As New scoreTableCell(9) With {.empty = True, .writable = True}
+    Private fullHouse As New scoreTableCell(10) With {.empty = True, .writable = True}
+    Private smallStraight As New scoreTableCell(11) With {.empty = True, .writable = True}
+    Private largeStraight As New scoreTableCell(12) With {.empty = True, .writable = True}
+    Private yahtzee As New scoreTableCell(13) With {.empty = True, .writable = True}
+    Private chance As New scoreTableCell(14) With {.empty = True, .writable = True}
 
-    Dim lowerTotal As New scoreTableCell(15) With {.empty = False, .writable = False}
-    Dim grandTotal As New scoreTableCell(16) With {.empty = False, .writable = False}
+    Private lowerTotal As New scoreTableCell(15) With {.empty = False, .writable = False}
+    Private grandTotal As New scoreTableCell(16) With {.empty = False, .writable = False}
 
     Public scoreTableCells As List(Of scoreTableCell) = New List(Of scoreTableCell) From {aces, twos, threes, fours, _
         fives, sixes, prem, upperTotal, threeOfKind, fourOfKind, fullHouse, smallStraight, largeStraight, yahtzee, chance, _
          lowerTotal, grandTotal}
 
     Public Sub getPossibleScores()
-        aces.setPosScore(scoreController.getUpperScore(1))
-        twos.setPosScore(scoreController.getUpperScore(2))
-        threes.setPosScore(scoreController.getUpperScore(3))
-        fours.setPosScore(scoreController.getUpperScore(4))
-        fives.setPosScore(scoreController.getUpperScore(5))
-        sixes.setPosScore(scoreController.getUpperScore(6))
-        threeOfKind.setPosScore(scoreController.get3ofKindScore())
-        fourOfKind.setPosScore(scoreController.get4ofKindScore())
-        fullHouse.setPosScore(scoreController.getFullHouse())
-        smallStraight.setPosScore(scoreController.getSmallStraight())
-        largeStraight.setPosScore(scoreController.getLargeStraight())
-        yahtzee.setPosScore(scoreController.getYahtzee())
-        chance.setPosScore(scoreController.getChanceScore())
+        aces.setPosScore(scoreRules.getUpperScore(1))
+        twos.setPosScore(scoreRules.getUpperScore(2))
+        threes.setPosScore(scoreRules.getUpperScore(3))
+        fours.setPosScore(scoreRules.getUpperScore(4))
+        fives.setPosScore(scoreRules.getUpperScore(5))
+        sixes.setPosScore(scoreRules.getUpperScore(6))
+        threeOfKind.setPosScore(scoreRules.get3ofKindScore())
+        fourOfKind.setPosScore(scoreRules.get4ofKindScore())
+        fullHouse.setPosScore(scoreRules.getFullHouse())
+        smallStraight.setPosScore(scoreRules.getSmallStraight())
+        largeStraight.setPosScore(scoreRules.getLargeStraight())
+        yahtzee.setPosScore(scoreRules.getYahtzee())
+        chance.setPosScore(scoreRules.getChanceScore())
     End Sub
 
     Public Sub setupTable()
@@ -64,68 +64,68 @@
         Select Case row
             Case 0
                 If scoreTableCells(row).writable = True Then
-                    scoreTableCells(row).writeScore(scoreController.getUpperScore(1))
+                    scoreTableCells(row).writeScore(scoreRules.getUpperScore(1))
                 End If
 
             Case 1
                 If scoreTableCells(row).writable = True Then
-                    scoreTableCells(row).writeScore(scoreController.getUpperScore(2))
+                    scoreTableCells(row).writeScore(scoreRules.getUpperScore(2))
                 End If
 
             Case 2
                 If scoreTableCells(row).writable = True Then
-                    scoreTableCells(row).writeScore(scoreController.getUpperScore(3))
+                    scoreTableCells(row).writeScore(scoreRules.getUpperScore(3))
                 End If
 
             Case 3
                 If scoreTableCells(row).writable = True Then
-                    scoreTableCells(row).writeScore(scoreController.getUpperScore(4))
+                    scoreTableCells(row).writeScore(scoreRules.getUpperScore(4))
                 End If
 
             Case 4
                 If scoreTableCells(row).writable = True Then
-                    scoreTableCells(row).writeScore(scoreController.getUpperScore(5))
+                    scoreTableCells(row).writeScore(scoreRules.getUpperScore(5))
                 End If
 
             Case 5
                 If scoreTableCells(row).writable = True Then
-                    scoreTableCells(row).writeScore(scoreController.getUpperScore(6))
+                    scoreTableCells(row).writeScore(scoreRules.getUpperScore(6))
                 End If
 
 
             Case 8
                 If scoreTableCells(row).writable = True Then
-                    scoreTableCells(row).writeScore(scoreController.get3ofKindScore())
+                    scoreTableCells(row).writeScore(scoreRules.get3ofKindScore())
                 End If
 
             Case 9
                 If scoreTableCells(row).writable = True Then
-                    scoreTableCells(row).writeScore(scoreController.get4ofKindScore())
+                    scoreTableCells(row).writeScore(scoreRules.get4ofKindScore())
                 End If
 
             Case 10
                 If scoreTableCells(row).writable = True Then
-                    scoreTableCells(row).writeScore(scoreController.getFullHouse())
+                    scoreTableCells(row).writeScore(scoreRules.getFullHouse())
                 End If
 
             Case 11
                 If scoreTableCells(row).writable = True Then
-                    scoreTableCells(row).writeScore(scoreController.getSmallStraight())
+                    scoreTableCells(row).writeScore(scoreRules.getSmallStraight())
                 End If
 
             Case 12
                 If scoreTableCells(row).writable = True Then
-                    scoreTableCells(row).writeScore(scoreController.getLargeStraight())
+                    scoreTableCells(row).writeScore(scoreRules.getLargeStraight())
                 End If
 
             Case 13
                 If scoreTableCells(row).writable = True Then
-                    scoreTableCells(row).writeScore(scoreController.getYahtzee())
+                    scoreTableCells(row).writeScore(scoreRules.getYahtzee())
                 End If
 
             Case 14
                 If scoreTableCells(row).writable = True Then
-                    scoreTableCells(row).writeScore(scoreController.getChanceScore())
+                    scoreTableCells(row).writeScore(scoreRules.getChanceScore())
                 End If
         End Select
 
