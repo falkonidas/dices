@@ -1,6 +1,11 @@
 ﻿Public Class scoreRules
-    Inherits dicesRules
-
+    
+    Protected dices As New List(Of dice)
+    
+    Public Sub getDices(ByVal dices As List(Of dice))
+        Me.dices = dices
+    End Sub
+    
     Public Function getUpperScore(ByVal dots As Integer)
         Dim score As Integer
         For Each dice In Me.dices
