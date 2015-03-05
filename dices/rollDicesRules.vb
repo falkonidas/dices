@@ -1,8 +1,13 @@
 ﻿Public Class rollDicesRules
-    Inherits dicesRules
+ 
     Public preGameOrPreScore As Boolean = True
     Public rollCounter As New Integer
     Public Event dicesRolled()
+    Protected dices As New List(Of dice)
+    
+    Public Sub getDices(ByVal dices As List(Of dice))
+        Me.dices = dices
+    End Sub
 
     Public Sub rollDices()
         For Each dice In dices
